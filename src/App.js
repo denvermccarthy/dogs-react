@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './view/Home/Home';
+import DogDetail from './components/DogDetail/DogDetail';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route exact path={'/'}>
             <Home />
+          </Route>
+          <Route path={'/dogs/:id'}>
+            <DogDetail />
           </Route>
         </Switch>
       </div>
