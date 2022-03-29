@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { fetchDogById } from '../../services/dogs';
 
@@ -16,5 +17,9 @@ export default function DogDetail() {
 
   if (!dog) return <div>loading...</div>;
 
-  return <div>{dog.name}</div>;
+  return (
+    <div>
+      {dog.name} <Link to={`/dogs/${id}/edit`}>edit</Link>
+    </div>
+  );
 }

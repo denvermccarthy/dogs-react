@@ -9,3 +9,5 @@ export const fetchDogById = async (id) => {
   const resp = await client.from('dogs').select().match({ id }).single();
   return checkError(resp);
 };
+
+export const updateDog = async (dog) => await client.from('dogs').update(dog).match({ id: dog.id });

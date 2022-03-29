@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './view/Home/Home';
 import DogDetail from './components/DogDetail/DogDetail';
+import DogForm from './components/DogForm/DogForm';
+import EditPage from './view/Edit/EditPage';
 
 function App() {
   return (
@@ -13,8 +15,14 @@ function App() {
           <Route exact path={'/'}>
             <Home />
           </Route>
-          <Route path={'/dogs/:id'}>
+          <Route exact path={'/dogs/new'}>
+            <div>new dog</div>
+          </Route>
+          <Route exact path={'/dogs/:id'}>
             <DogDetail />
+          </Route>
+          <Route exact path={'/dogs/:id/edit'}>
+            <EditPage />
           </Route>
         </Switch>
       </div>
