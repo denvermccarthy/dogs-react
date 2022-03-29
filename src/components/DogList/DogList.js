@@ -21,6 +21,7 @@ export default function DogList() {
       {dogs.map((dog) => (
         <div key={dog.id}>
           <NavLink to={`/dogs/${dog.id}`}>
+            <img src={`${dog.img}`} alt="Cute Puppy" />
             <h4>{dog.name}</h4>
           </NavLink>
         </div>
