@@ -29,7 +29,7 @@ export default function DogForm({ submitHandler, dog, setDog }) {
       <label>
         Breed
         <input
-          type={'number'}
+          type={'text'}
           value={dog.breed}
           onChange={(e) => updateDawg('breed', e.target.value)}
         />

@@ -20,13 +20,7 @@ export default function EditPage() {
   }, [id]);
 
   if (loading) return <div>loading...</div>;
-
-  const updateDawg = (attribute, val) => {
-    const newDawg = { ...dog, [attribute]: val };
-    setDog(newDawg);
-  };
-
-  const sendUpdate = async (e) => {
+  const sendUpdate = async () => {
     try {
       await updateDog(dog);
       history.push(`/dogs/${id}`);
@@ -37,7 +31,7 @@ export default function EditPage() {
 
   return (
     <div>
-      <DogForm submitHandler={sendUpdate} {...{ updateDawg, dog, setDog }} />
+      <DogForm submitHandler={sendUpdate} {...{ dog, setDog }} />
     </div>
   );
 }

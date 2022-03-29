@@ -11,3 +11,5 @@ export const fetchDogById = async (id) => {
 };
 
 export const updateDog = async (dog) => await client.from('dogs').update(dog).match({ id: dog.id });
+
+export const createDog = async (dog) => await client.from('dogs').insert(dog);
