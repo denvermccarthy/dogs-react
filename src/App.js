@@ -8,6 +8,7 @@ import NewPage from './view/New/NewPage';
 import Auth from './view/Auth/Auth';
 import { getUser } from './services/users';
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -24,13 +25,13 @@ function App() {
             <Auth {...{ setUser }} />
           </Route>
           <Route exact path={'/dogs/new'}>
-            <NewPage />
+            {user ? <NewPage /> : <Redirect to={'/auth'} />}
           </Route>
           <Route exact path={'/dogs/:id'}>
             <DogDetail {...{ user }} />
           </Route>
           <Route exact path={'/dogs/:id/edit'}>
-            <EditPage />
+            {user ? <EditPage /> : <Redirect to={'/auth'} />}
           </Route>
         </Switch>
       </div>
