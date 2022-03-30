@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { signInUser, signUpUser } from '../../services/users';
 
 export default function Auth() {
   const [hasAccount, setHasAccount] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const submitCreds = (e) => {
+  const submitCreds = async (e) => {
     e.preventDefault();
-    console.log('submitted!');
+    try {
+      {
+        hasAccount ? await signInUser(username, password) : await signUpUser(username, password);
+      }
+    } catch (error) {
+      setError(e.message);
+    }
   };
 
   return (
@@ -28,6 +36,7 @@ export default function Auth() {
           </li>
         </ul>
 
+        {error && <p>{error}</p>}
         <form className="flex flex-col items-center" onSubmit={submitCreds}>
           <label>
             Username:
