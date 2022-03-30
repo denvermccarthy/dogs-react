@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { signInUser, signUpUser } from '../../services/users';
 
-export default function Auth() {
+export default function Auth({ setUser }) {
   const [hasAccount, setHasAccount] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const history = useHistory();
 
   const submitCreds = async (e) => {
     e.preventDefault();
     try {
       {
-        hasAccount ? await signInUser(username, password) : await signUpUser(username, password);
+        hasAccount
+          ? await signInUser(username, password).then(({ email }) => setUser(email))
+          : await signUpUser(username, password).then(({ email }) => setUser(email));
       }
+      history.push('/');
     } catch (error) {
       setError(e.message);
     }
