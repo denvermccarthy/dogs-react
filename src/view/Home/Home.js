@@ -3,7 +3,7 @@ import DogList from '../../components/DogList/DogList';
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <DogList />
     </div>
   );

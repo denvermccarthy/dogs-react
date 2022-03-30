@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { fetchDogById } from '../../services/dogs';
+import { deleteDog, fetchDogById } from '../../services/dogs';
 
 export default function DogDetail() {
   const [dog, setDog] = useState(null);
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const fetch = async () => {
@@ -17,9 +19,19 @@ export default function DogDetail() {
 
   if (!dog) return <div>loading...</div>;
 
+  const deleteDogHandler = async () => {
+    await deleteDog(id);
+    history.push('/');
+  };
+
   return (
-    <div>
-      {dog.name} <Link to={`/dogs/${id}/edit`}>edit</Link>
+    <div className="flex flex-col h-full items-center text-center mt-4">
+      <h1 className="text-5xl">{dog.name}</h1>
+      <h3 className="text-2xl">Breed: {dog.breed}</h3>
+      <img className=" " src={`${dog.img}`} alt="Cute photo of a dog" />
+      <p>{dog.bio}</p>
+      <Link to={`/dogs/${id}/edit`}>edit</Link>
+      <button onClick={deleteDogHandler}>delete</button>
     </div>
   );
 }

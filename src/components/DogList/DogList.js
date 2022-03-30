@@ -17,12 +17,12 @@ export default function DogList() {
   }, []);
 
   return (
-    <div>
+    <div className="flex justify-center items-center gap-y-10 flex-col w-full">
       {dogs.map((dog) => (
         <div key={dog.id}>
-          <NavLink to={`/dogs/${dog.id}`}>
-            <img src={`${dog.img}`} alt="Cute Puppy" />
-            <h4>{dog.name}</h4>
+          <NavLink className={'flex flex-col items-center w-screen'} to={`/dogs/${dog.id}`}>
+            <img className="w-1/3 h-auto" src={`${dog.img}`} alt="Cute Puppy" />
+            <h4 className="text-2xl">{dog.name}</h4>
           </NavLink>
         </div>
       ))}

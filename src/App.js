@@ -9,8 +9,8 @@ import NewPage from './view/New/NewPage';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Header />
+      <div className="flex flex-col h-screen text-center">
+        <Header className="h-12" />
         <Switch>
           <Route exact path={'/'}>
             <Home />
