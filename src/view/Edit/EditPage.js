@@ -22,7 +22,8 @@ export default function EditPage() {
   if (loading) return <div>loading...</div>;
   const sendUpdate = async () => {
     try {
-      await updateDog(dog);
+      const dawg = await updateDog(dog);
+      console.log(dawg);
       history.push(`/dogs/${id}`);
     } catch (error) {
       alert(error.message);
