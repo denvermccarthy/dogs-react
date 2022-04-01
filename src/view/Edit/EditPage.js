@@ -7,6 +7,7 @@ import { fetchDogById, updateDog } from '../../services/dogs';
 export default function EditPage() {
   const [dog, setDog] = useState({ name: '', bio: '', age: '', breed: '' });
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(null);
   const { id } = useParams();
   const history = useHistory();
 
@@ -22,9 +23,9 @@ export default function EditPage() {
   if (loading) return <div>loading...</div>;
   const sendUpdate = async () => {
     try {
-      const dawg = await updateDog(dog);
-      console.log(dawg);
-      history.push(`/dogs/${id}`);
+      await updateDog(dog);
+      setSuccess('Success!');
+      setTimeout(() => history.push(`/dogs/${id}`), 500);
     } catch (error) {
       alert(error.message);
     }
@@ -32,6 +33,7 @@ export default function EditPage() {
 
   return (
     <div>
+      {success && <div>{success}</div>}
       <DogForm submitHandler={sendUpdate} {...{ dog, setDog }} />
     </div>
   );
