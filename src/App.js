@@ -5,24 +5,33 @@ import Home from './view/Home/Home';
 import DogDetail from './components/DogDetail/DogDetail';
 import EditPage from './view/Edit/EditPage';
 import NewPage from './view/New/NewPage';
+import Auth from './view/Auth/Auth';
+import { getUser } from './services/users';
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 function App() {
+  const [user, setUser] = useState(getUser());
+
   return (
     <BrowserRouter>
-      <div className="flex flex-col h-screen text-center">
-        <Header className="h-12" />
+      <div className="flex flex-col h-screen">
+        <Header {...{ user, setUser }} />
         <Switch>
           <Route exact path={'/'}>
             <Home />
           </Route>
+          <Route exact path={'/auth'}>
+            <Auth {...{ setUser }} />
+          </Route>
           <Route exact path={'/dogs/new'}>
-            <NewPage />
+            {user ? <NewPage /> : <Redirect to={'/auth'} />}
           </Route>
           <Route exact path={'/dogs/:id'}>
-            <DogDetail />
+            <DogDetail {...{ user }} />
           </Route>
           <Route exact path={'/dogs/:id/edit'}>
-            <EditPage />
+            {user ? <EditPage /> : <Redirect to={'/auth'} />}
           </Route>
         </Switch>
       </div>
