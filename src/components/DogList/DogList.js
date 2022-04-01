@@ -4,17 +4,21 @@ import { fetchDogs } from '../../services/dogs';
 
 export default function DogList() {
   const [dogs, setDogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetch = async () => {
       try {
         const data = await fetchDogs();
         setDogs(data);
+        setLoading(false);
       } catch (error) {
         alert(error.message);
       }
     };
     fetch();
   }, []);
+
+  if (loading) return <div>loading</div>;
 
   return (
     <div className="flex justify-center items-center gap-y-10 flex-col w-full">
