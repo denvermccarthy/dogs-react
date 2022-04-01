@@ -8,6 +8,7 @@ export default function EditPage() {
   const [dog, setDog] = useState({ name: '', bio: '', age: '', breed: '' });
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const history = useHistory();
 
@@ -27,13 +28,14 @@ export default function EditPage() {
       setSuccess('Success!');
       setTimeout(() => history.push(`/dogs/${id}`), 500);
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div>
       {success && <div>{success}</div>}
+      {error && <div>{error}</div>}
       <DogForm submitHandler={sendUpdate} {...{ dog, setDog }} />
     </div>
   );

@@ -5,6 +5,7 @@ import { fetchDogs } from '../../services/dogs';
 export default function DogList() {
   const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -12,7 +13,7 @@ export default function DogList() {
         setDogs(data);
         setLoading(false);
       } catch (error) {
-        alert(error.message);
+        setError(error.message);
       }
     };
     fetch();
@@ -22,6 +23,7 @@ export default function DogList() {
 
   return (
     <div className="flex justify-center items-center gap-y-10 flex-col w-full">
+      {error && <p>error</p>}
       {dogs.map((dog) => (
         <div key={dog.id}>
           <NavLink className={'flex flex-col items-center w-screen'} to={`/dogs/${dog.id}`}>
